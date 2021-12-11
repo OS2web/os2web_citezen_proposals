@@ -15,10 +15,6 @@ use Drupal\comment\Entity\Comment;
  */
 function os2web_citizen_proposals_theme($existing, $type, $theme, $path) {
   return [
-    'paragraph__os2web_citizen_proposals__preview' => [
-      'template' => 'paragraph--os2web-citizen-proposals-preview',
-      'base hook' => 'paragraph',
-    ],
     'paragraph__os2web_citizen_proposals__default' => [
       'template' => 'paragraph--os2web-citizen-proposals',
       'base hook' => 'paragraph',
