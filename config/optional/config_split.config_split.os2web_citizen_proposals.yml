@@ -1,0 +1,20 @@
+uuid: fa745531-c492-4c8c-88a9-bb9a58560ea9
+langcode: da
+status: true
+dependencies: {  }
+id: os2web_citizen_proposals
+label: 'OS2Web Citizen Proposals'
+description: ''
+weight: 0
+storage: folder
+folder: modules/contrib/os2web_citizen_proposals/config/install
+module: {  }
+theme: {  }
+complete_list:
+  - 'os2web_citizen_proposals*'
+  - '*os2web_citizen_proposals*'
+  - '*os2web_citizen_proposals'
+  - '*os2web_cit_props'
+  - '*os2web_cit_props*'
+  - 'os2web_cit_props*'
+partial_list: {  }

@@ -1,0 +1,77 @@
+uuid: b2b42e4f-8dde-4009-a26b-0c2d76939449
+langcode: da
+status: true
+dependencies:
+  config:
+    - comment.type.os2web_citizen_proposals_vote
+    - field.field.comment.os2web_citizen_proposals_vote.field_os2web_cit_props_v_address
+    - field.field.comment.os2web_citizen_proposals_vote.field_os2web_cit_props_v_city
+    - field.field.comment.os2web_citizen_proposals_vote.field_os2web_cit_props_v_email
+    - field.field.comment.os2web_citizen_proposals_vote.field_os2web_cit_props_v_name
+    - field.field.comment.os2web_citizen_proposals_vote.field_os2web_cit_props_v_zipcode
+id: comment.os2web_citizen_proposals_vote.default
+targetEntityType: comment
+bundle: os2web_citizen_proposals_vote
+mode: default
+content:
+  author:
+    weight: -2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_os2web_cit_props_v_address:
+    weight: 12
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_os2web_cit_props_v_city:
+    weight: 15
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_os2web_cit_props_v_email:
+    weight: 14
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_os2web_cit_props_v_name:
+    weight: 11
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_os2web_cit_props_v_zipcode:
+    weight: 13
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  subject:
+    type: string_textfield
+    weight: 10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

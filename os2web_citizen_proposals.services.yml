@@ -1,0 +1,4 @@
+services:
+  os2web_citizen_proposals.email_service:
+    class: Drupal\os2web_citizen_proposals\Service\ProposalEmailService
+    arguments: []

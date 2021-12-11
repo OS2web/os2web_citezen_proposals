@@ -1,0 +1,21 @@
+uuid: 158ab7af-410b-4714-a701-216549c4e7a5
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_os2web_cit_props_city
+field_name: field_os2web_cit_props_city
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

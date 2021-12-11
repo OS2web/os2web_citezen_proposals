@@ -1,0 +1,3 @@
+administer os2web_citizen_proposals:
+  title: 'Administer OS2Web Citizen proposals'
+  restrict access: true

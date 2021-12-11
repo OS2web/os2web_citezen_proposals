@@ -1,0 +1,8 @@
+uuid: 67fd7884-68c8-46d1-a1b1-5621dfcea8d4
+langcode: da
+status: true
+dependencies: {  }
+name: 'OS2Web Citizen Proposals Reject Reason'
+vid: os2web_citizen_proposals_rej_rea
+description: ''
+weight: 0

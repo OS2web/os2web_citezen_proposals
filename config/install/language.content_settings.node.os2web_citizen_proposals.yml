@@ -1,0 +1,11 @@
+uuid: 622d18e5-4842-446c-87b3-1193c6b86ae6
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.os2web_citizen_proposals
+id: node.os2web_citizen_proposals
+target_entity_type_id: node
+target_bundle: os2web_citizen_proposals
+default_langcode: site_default
+language_alterable: false

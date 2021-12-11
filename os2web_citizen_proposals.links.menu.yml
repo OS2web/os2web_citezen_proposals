@@ -1,0 +1,5 @@
+os2web_citizen_proposals.settings:
+  title: OS2Web Citizen Proposals settings
+  description: Settings for OS2Web Citizen Proposals.
+  route_name: os2web_citizen_proposals.settings_form
+  parent: system.admin_config_content

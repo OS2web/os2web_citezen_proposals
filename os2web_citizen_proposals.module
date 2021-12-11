@@ -1,0 +1,196 @@
+<?php
+
+/**
+ * @file
+ * OS2Web Citizen Proposals module file.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\Node;
+use Drupal\os2web_citizen_proposals\Form\SettingsForm;
+use Drupal\comment\Entity\Comment;
+
+/**
+ * Implements hook_theme().
+ */
+function os2web_citizen_proposals_theme($existing, $type, $theme, $path) {
+  return [
+    'paragraph__os2web_citizen_proposals__preview' => [
+      'template' => 'paragraph--os2web-citizen-proposals-preview',
+      'base hook' => 'paragraph',
+    ],
+    'paragraph__os2web_citizen_proposals__default' => [
+      'template' => 'paragraph--os2web-citizen-proposals',
+      'base hook' => 'paragraph',
+      'variables' => [
+        'new_proposal_form' => NULL,
+        'active_proposals' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_paragraph().
+ *
+ * Adding proposal page into into paragraph.
+ */
+function os2web_citizen_proposals_preprocess_paragraph__os2web_citizen_proposals(&$variables) {
+  if ($variables['view_mode'] == 'preview') {
+    return;
+  }
+
+  $form = \Drupal::formBuilder()->getForm('Drupal\os2web_citizen_proposals\Form\CreateProposalForm');
+  $variables['new_proposal_form'] = $form;
+
+  $query = \Drupal::entityQuery('node');
+  $query->condition('status', 1);
+  $query->condition('type', 'os2web_citizen_proposals');
+  $entity_ids = $query->execute();
+  if (!empty($entity_ids)) {
+    $proposals = Node::loadMultiple($entity_ids);
+
+    foreach ($proposals as $proposal) {
+      $variables['published_proposals'][$proposal->id()] = [
+        'proposal_node' => $proposal,
+        'vote_form' => \Drupal::formBuilder()->getForm('Drupal\os2web_citizen_proposals\Form\ProposalVoteForm', $proposal->id()),
+        'votes_count' => $proposal->get('field_os2web_cit_props_votes')->comment_count,
+      ];
+    }
+  }
+
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function os2web_citizen_proposals_node_presave(EntityInterface $entity) {
+  if ($entity->bundle() != 'os2web_citizen_proposals') {
+    return;
+  }
+
+  // Skip for new nodes.
+  if ($entity->isNew()) {
+    return;
+  }
+
+  // Publish node if proposal is accepted.
+  // Unpublish node if proposal is rejected.
+  $status = $entity->field_os2web_cit_props_status->value;
+  if ($status == 'accept') {
+    $entity->setPublished();
+  } elseif ($status == 'reject') {
+    $entity->setUnpublished();
+  }
+
+  // Send emails only if status updated.
+  if ($entity->original->field_os2web_cit_props_status->value != $status) {
+    /** @var \Drupal\os2web_citizen_proposals\Service\ProposalEmailService $emailService */
+    $emailService = \Drupal::service('os2web_citizen_proposals.email_service');
+
+    if ($status == 'accept') {
+      $emailService->sendUserProposalAcceptedEmail($entity);
+    }
+    elseif ($status == 'reject') {
+      $emailService->sendUserProposalRejectedEmail($entity);
+    }
+  }
+}
+
+/**
+ * Implements hook_mail().
+ */
+function os2web_citizen_proposals_mail($key, &$message, $params) {
+  $message['subject'] = $params['subject'];
+  $message['body'][] = $params['body'];
+
+  if (!isset($params['from'])) {
+    $params['from'] = \Drupal::config('system.site')->get('mail');
+  }
+
+  if (!isset($params['sender'])) {
+    $params['sender'] = \Drupal::config('system.site')->get('name');
+  }
+  $params['sender'] = '=?UTF-8?B?' . base64_encode($params['sender']) . '?=';
+
+  $message['headers'] = array_merge($message['headers'], [
+    'content-type' => 'text/html; charset=UTF-8;',
+    'content-transfer-encoding' => '8Bit',
+    'MIME-Version' => '1.0',
+    'reply-to' => $params['from'],
+  ]);
+
+  if (isset($params['Cc'])) {
+    $message['headers']['Cc'] = $params['Cc'];
+  }
+
+  if (isset($params['Bcc'])) {
+    $message['headers']['Bcc'] = $params['Bcc'];
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function os2web_citizen_proposals_cron() {
+  os2web_citizen_proposals_expire_nodes();
+  os2web_citizen_proposals_delete_nodes();
+}
+
+/**
+ * Unpublish proposals when they are older than specified period.
+ */
+function os2web_citizen_proposals_expire_nodes() {
+  $config = \Drupal::config(SettingsForm::$configName);
+  $publishPeriodMonths = $config->get('proposal_publish_period_months');
+  if (!$publishPeriodMonths) {
+    $publishPeriodMonths = 2;
+  }
+
+  $publishPeriodTs = strtotime("-$publishPeriodMonths months");
+
+  $query = \Drupal::entityQuery('node');
+  $query->condition('status', 1);
+  $query->condition('type', 'os2web_citizen_proposals');
+  $query->condition('created', $publishPeriodTs, '<');
+  $entity_ids = $query->execute();
+
+  if (empty($entity_ids)) {
+    return;
+  }
+
+  $nodes = Node::loadMultiple($entity_ids);
+  /** @var \Drupal\node\NodeInterface $node */
+  foreach ($nodes as $node) {
+    $node->setUnpublished();
+    $node->save();
+  }
+}
+
+/**
+ * Deletes proposals when they are older than specified period.
+ */
+function os2web_citizen_proposals_delete_nodes() {
+  $config = \Drupal::config(SettingsForm::$configName);
+  $lifePeriodMonths = $config->get('proposal_life_period_months');
+  if (!$lifePeriodMonths) {
+    $lifePeriodMonths = 24;
+  }
+
+  $lifePeriodTs = strtotime("-$lifePeriodMonths months");
+
+  $query = \Drupal::entityQuery('node');
+  $query->condition('type', 'os2web_citizen_proposals');
+  $query->condition('created', $lifePeriodTs, '<');
+  $entity_ids = $query->execute();
+
+  if (empty($entity_ids)) {
+    return;
+  }
+
+  $nodes = Node::loadMultiple($entity_ids);
+  /** @var \Drupal\node\NodeInterface $node */
+  foreach ($nodes as $node) {
+    $node->delete();
+  }
+}

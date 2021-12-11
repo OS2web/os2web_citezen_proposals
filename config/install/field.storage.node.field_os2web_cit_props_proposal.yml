@@ -1,0 +1,19 @@
+uuid: e7c90c21-d387-4025-92c8-5edc28594de3
+langcode: da
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_os2web_cit_props_proposal
+field_name: field_os2web_cit_props_proposal
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,34 @@
+<div class="os2web-citizen-proposals--wrapper">
+  <div class="new-proposal-form">
+    {{ new_proposal_form.form_build_id }}
+    {{ new_proposal_form.form_id }}
+    {{ new_proposal_form }}
+  </div>
+
+  <h1>Proposals</h1>
+  <div class="published-proposal-wrapper">
+    {% for proposal_item in published_proposals %}
+      {% set proposal = proposal_item['proposal_node']  %}
+      {% set vote_form = proposal_item['vote_form'] %}
+      {% set votes_count = proposal_item['votes_count'] %}
+
+      <div class="proposal" data-nid="{{ proposal.id }}">
+        <a class="header">
+          <span class="date">{{ proposal.getCreatedTime()|date("d M Y") }}</span>
+          <span class="title">{{ proposal.label }}</span>
+          <span class="votes">{{ votes_count }}</span>
+        </a>
+        <div class="body">
+          {{ proposal.field_os2web_cit_props_proposal.value }}
+          <div class="author">Oprettet af {{ proposal.field_os2web_cit_props_name.value }}</div>
+          <hr />
+
+          <div class="vote_headline">Stem på dette forslag</div>
+          {{ vote_form.form_build_id }}
+          {{ vote_form.form_id }}
+          {{ vote_form }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>

@@ -1,0 +1,11 @@
+uuid: 5f737d14-42ee-4acf-93be-decfc599d2c3
+langcode: da
+status: true
+dependencies:
+  config:
+    - comment.type.os2web_citizen_proposals_vote
+id: comment.os2web_citizen_proposals_vote
+target_entity_type_id: comment
+target_bundle: os2web_citizen_proposals_vote
+default_langcode: site_default
+language_alterable: false

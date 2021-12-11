@@ -1,0 +1,195 @@
+uuid: 3b729f73-a076-43e3-a1a9-2db7d90d9396
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.node.os2web_citizen_proposals.field_os2web_cit_props_address
+    - field.field.node.os2web_citizen_proposals.field_os2web_cit_props_city
+    - field.field.node.os2web_citizen_proposals.field_os2web_cit_props_email
+    - field.field.node.os2web_citizen_proposals.field_os2web_cit_props_name
+    - field.field.node.os2web_citizen_proposals.field_os2web_cit_props_proposal
+    - field.field.node.os2web_citizen_proposals.field_os2web_cit_props_rej_ext
+    - field.field.node.os2web_citizen_proposals.field_os2web_cit_props_rej_reas
+    - field.field.node.os2web_citizen_proposals.field_os2web_cit_props_status
+    - field.field.node.os2web_citizen_proposals.field_os2web_cit_props_votes
+    - field.field.node.os2web_citizen_proposals.field_os2web_cit_props_zip_code
+    - node.type.os2web_citizen_proposals
+  module:
+    - comment
+    - content_moderation
+    - path
+    - scheduler
+    - scheduler_content_moderation_integration
+id: node.os2web_citizen_proposals.default
+targetEntityType: node
+bundle: os2web_citizen_proposals
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_os2web_cit_props_address:
+    weight: 16
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_os2web_cit_props_city:
+    weight: 18
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_os2web_cit_props_email:
+    weight: 19
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+    region: content
+  field_os2web_cit_props_name:
+    weight: 15
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_os2web_cit_props_proposal:
+    weight: 14
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_os2web_cit_props_rej_ext:
+    weight: 22
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+    region: content
+  field_os2web_cit_props_rej_reas:
+    weight: 21
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_os2web_cit_props_status:
+    weight: 20
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  field_os2web_cit_props_votes:
+    weight: 23
+    settings: {  }
+    third_party_settings: {  }
+    type: comment_default
+    region: content
+  field_os2web_cit_props_zip_code:
+    weight: 17
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  langcode:
+    type: language_select
+    weight: 1
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  moderation_state:
+    type: moderation_state_default
+    weight: 12
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 4
+    region: content
+    third_party_settings: {  }
+  publish_on:
+    type: datetime_timestamp_no_default
+    weight: 9
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publish_state:
+    type: scheduler_moderation
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 13
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 5
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+      match_limit: 10
+    region: content
+    third_party_settings: {  }
+  unpublish_on:
+    type: datetime_timestamp_no_default
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  unpublish_state:
+    type: scheduler_moderation
+    weight: 8
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  url_redirects:
+    weight: 11
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

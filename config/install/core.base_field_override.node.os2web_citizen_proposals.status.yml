@@ -1,0 +1,22 @@
+uuid: d4363c9b-b607-4c9a-9e0f-da5b200ceb60
+langcode: da
+status: true
+dependencies:
+  config:
+    - node.type.os2web_citizen_proposals
+id: node.os2web_citizen_proposals.status
+field_name: status
+entity_type: node
+bundle: os2web_citizen_proposals
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

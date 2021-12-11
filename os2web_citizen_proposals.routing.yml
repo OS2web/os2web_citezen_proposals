@@ -1,0 +1,10 @@
+os2web_citizen_proposals.settings_form:
+  path: '/admin/config/content/os2web-citizen-proposals'
+  defaults:
+    _title: 'OS2Web Citizen Proposals settings'
+    _form: 'Drupal\os2web_citizen_proposals\Form\SettingsForm'
+  requirements:
+    _permission: 'administer os2web_citizen_proposals'
+
+
+

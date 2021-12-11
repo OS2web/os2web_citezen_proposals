@@ -1,0 +1,10 @@
+uuid: 6b918340-b530-4b8d-8361-cdeec19b22f4
+langcode: da
+status: true
+dependencies: {  }
+id: os2web_citizen_proposals
+label: 'Borgerdrevne forslag'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

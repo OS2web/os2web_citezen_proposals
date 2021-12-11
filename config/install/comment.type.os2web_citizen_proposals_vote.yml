@@ -1,0 +1,8 @@
+uuid: 700e5dad-a997-4f2f-9850-b3fe58c41cf4
+langcode: da
+status: true
+dependencies: {  }
+id: os2web_citizen_proposals_vote
+label: 'OS2Web Citizen Proposals vote'
+target_entity_type_id: node
+description: ''

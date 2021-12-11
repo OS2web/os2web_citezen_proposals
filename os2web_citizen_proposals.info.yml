@@ -1,0 +1,13 @@
+name: OS2Web Citizen Proposals
+type: module
+description: Adds Citizen Proposals functionality.
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: OS2Web
+dependencies:
+  - drupal:comment
+  - drupal:taxonomy
+  - drupal:text
+  - drupal:views
+  - paragraphs
+configure: os2web_citizen_proposals.settings_form

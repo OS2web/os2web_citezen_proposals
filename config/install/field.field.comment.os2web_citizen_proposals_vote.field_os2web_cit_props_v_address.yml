@@ -1,0 +1,19 @@
+uuid: a0000de8-4ee5-496d-9218-25dbe7a7596e
+langcode: da
+status: true
+dependencies:
+  config:
+    - comment.type.os2web_citizen_proposals_vote
+    - field.storage.comment.field_os2web_cit_props_v_address
+id: comment.os2web_citizen_proposals_vote.field_os2web_cit_props_v_address
+field_name: field_os2web_cit_props_v_address
+entity_type: comment
+bundle: os2web_citizen_proposals_vote
+label: Address
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

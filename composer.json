@@ -1,0 +1,10 @@
+{
+  "name": "os2web/os2web_citizen_proposals",
+  "description": "Adds Citizen proposal functionality",
+  "type": "drupal-module",
+  "require": {
+    "drupal/core": "*"
+  },
+  "license": "EUPL-1.2",
+  "minimum-stability": "dev"
+}

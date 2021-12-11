@@ -1,0 +1,21 @@
+uuid: 898e1588-8ee1-4230-bc04-57a0c4677329
+langcode: da
+status: true
+dependencies:
+  module:
+    - comment
+id: comment.field_os2web_cit_props_v_city
+field_name: field_os2web_cit_props_v_city
+entity_type: comment
+type: string
+settings:
+  max_length: 255
+  is_ascii: false
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

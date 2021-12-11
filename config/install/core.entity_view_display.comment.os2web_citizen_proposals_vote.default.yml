@@ -1,0 +1,63 @@
+uuid: cc688578-a557-495b-8ee7-185b5a79d7f6
+langcode: da
+status: true
+dependencies:
+  config:
+    - comment.type.os2web_citizen_proposals_vote
+    - field.field.comment.os2web_citizen_proposals_vote.field_os2web_cit_props_v_address
+    - field.field.comment.os2web_citizen_proposals_vote.field_os2web_cit_props_v_city
+    - field.field.comment.os2web_citizen_proposals_vote.field_os2web_cit_props_v_email
+    - field.field.comment.os2web_citizen_proposals_vote.field_os2web_cit_props_v_name
+    - field.field.comment.os2web_citizen_proposals_vote.field_os2web_cit_props_v_zipcode
+id: comment.os2web_citizen_proposals_vote.default
+targetEntityType: comment
+bundle: os2web_citizen_proposals_vote
+mode: default
+content:
+  field_os2web_cit_props_v_address:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_os2web_cit_props_v_city:
+    weight: 105
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_os2web_cit_props_v_email:
+    weight: 104
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_os2web_cit_props_v_name:
+    weight: 101
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_os2web_cit_props_v_zipcode:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden:
+  langcode: true
+  search_api_excerpt: true

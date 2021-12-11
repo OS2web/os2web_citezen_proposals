@@ -1,0 +1,29 @@
+uuid: 5d6b14f4-9bcd-4fd4-a613-91aa14afef49
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_os2web_cit_props_rej_reas
+    - node.type.os2web_citizen_proposals
+    - taxonomy.vocabulary.os2web_citizen_proposals_rej_rea
+id: node.os2web_citizen_proposals.field_os2web_cit_props_rej_reas
+field_name: field_os2web_cit_props_rej_reas
+entity_type: node
+bundle: os2web_citizen_proposals
+label: 'Afvis forslag. Forslaget opfylder ikke betingelsen om...'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      os2web_citizen_proposals_rej_rea: os2web_citizen_proposals_rej_rea
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
