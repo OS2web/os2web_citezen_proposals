@@ -5,8 +5,8 @@
     {{ new_proposal_form }}
   </div>
 
-  <h1>Proposals</h1>
-  <div class="published-proposal-wrapper">
+  <h1>{{ 'Proposals'|t }}</h1>
+  <div id="proposals-list" class="published-proposal-wrapper">
     {% for proposal_item in published_proposals %}
       {% set proposal = proposal_item['proposal_node']  %}
       {% set vote_form = proposal_item['vote_form'] %}

@@ -4,6 +4,7 @@ namespace Drupal\os2web_citizen_proposals\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 
 class CreateProposalForm extends FormBase {
@@ -113,5 +114,10 @@ class CreateProposalForm extends FormBase {
 
     $emailService->sendUserProposalCreatedEmail($proposal);
     $emailService->sendAdminProposalCreatedEmail($proposal);
+
+    $current_uri = \Drupal::request()->getRequestUri();
+//    $httpAndHost = \Drupal::request()->getSchemeAndHttpHost();
+    $url = Url::fromUri('internal:' . $current_uri, ['fragment' => 'proposals-list']);
+    $form_state->setRedirectUrl($url);
   }
 }

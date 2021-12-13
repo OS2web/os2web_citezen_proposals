@@ -68,7 +68,7 @@ class ProposalVoteForm extends FormBase {
 
     $form['actions']['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Send vote') . $proposalId,
+      '#value' => $this->t('Send vote'),
       '#name' => "send-vote-$proposalId"
     ];
 
