@@ -216,8 +216,5 @@ class ProposalEmailService {
 
     $message['subject'] = str_replace($token, $replacement, $message['subject']);
     $message['body'] = str_replace($token, $replacement, $message['body']);
-
-    // Converting to new lintes to <br>.
-    $message['body'] = nl2br($message['body']);
   }
 }
