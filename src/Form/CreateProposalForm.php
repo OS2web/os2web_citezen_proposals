@@ -25,11 +25,15 @@ class CreateProposalForm extends FormBase {
    * @param FormStateInterface $form_state
    * @return array
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state)
+  {
     $form['proposal_title'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Proposal title'),
       '#required' => TRUE,
+      '#attributes' =>[
+        'placeholder' => $this->t('Proposal title')
+      ]
     ];
 
     $form['proposal_body'] = [
@@ -42,30 +46,45 @@ class CreateProposalForm extends FormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Your name'),
       '#required' => TRUE,
+      '#attributes' =>[
+        'placeholder' => $this->t('Name')
+      ]
     ];
 
     $form['address'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Address'),
       '#required' => TRUE,
+      '#attributes' =>[
+        'placeholder' => $this->t('Address')
+      ]
     ];
 
     $form['zipcode'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Zip code'),
       '#required' => TRUE,
+      '#attributes' =>[
+        'placeholder' => $this->t('Zip code')
+      ]
     ];
 
     $form['city'] = [
       '#type' => 'textfield',
       '#title' => $this->t('City'),
       '#required' => TRUE,
+      '#attributes' =>[
+        'placeholder' => $this->t('City')
+      ]
     ];
 
     $form['email'] = [
       '#type' => 'email',
       '#title' => $this->t('Your email'),
       '#required' => TRUE,
+      '#attributes' =>[
+        'placeholder' => $this->t('E-mail')
+      ]
     ];
 
     $form['actions']['submit'] = [
