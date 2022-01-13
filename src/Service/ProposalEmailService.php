@@ -164,10 +164,28 @@ class ProposalEmailService {
 
     $this->makeReplacements($message, $proposal);
 
+    // Setting front-end theme.
+    /** @var \Drupal\Core\Theme\ThemeInitialization $theme_initialization */
+    $theme_initialization = \Drupal::service('theme.initialization');
+    $active_theme = \Drupal::theme()->getActiveTheme();
+    $config = \Drupal::config('system.theme');
+    $defaultTheme =  $config->get('default');
+    \Drupal::theme()->setActiveTheme($theme_initialization->getActiveThemeByName($defaultTheme));
+
+    \Drupal::service('plugin.manager.mail')
+      ->mail('os2web_citizen_proposals', $template_key, $message['to'], \Drupal::languageManager()
+        ->getDefaultLanguage()
+        ->getId(), $message);
+
     return \Drupal::service('plugin.manager.mail')
       ->mail('os2web_citizen_proposals', $template_key, $message['to'], \Drupal::languageManager()
         ->getDefaultLanguage()
         ->getId(), $message);
+
+    // Changing theme back.
+    \Drupal::theme()->setActiveTheme($active_theme);
+
+    return $mailSentStatus;
   }
 
   /**
