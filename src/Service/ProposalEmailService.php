@@ -172,12 +172,7 @@ class ProposalEmailService {
     $defaultTheme =  $config->get('default');
     \Drupal::theme()->setActiveTheme($theme_initialization->getActiveThemeByName($defaultTheme));
 
-    \Drupal::service('plugin.manager.mail')
-      ->mail('os2web_citizen_proposals', $template_key, $message['to'], \Drupal::languageManager()
-        ->getDefaultLanguage()
-        ->getId(), $message);
-
-    return \Drupal::service('plugin.manager.mail')
+    $mailSentStatus = \Drupal::service('plugin.manager.mail')
       ->mail('os2web_citizen_proposals', $template_key, $message['to'], \Drupal::languageManager()
         ->getDefaultLanguage()
         ->getId(), $message);
