@@ -143,7 +143,8 @@ class ProposalVoteForm extends FormBase {
     $config = \Drupal::config(SettingsForm::$configName);
     $maxVotes = $config->get('proposal_max_votes');
     if ($proposal->get('field_os2web_cit_props_votes')->comment_count == $maxVotes) {
-      $emailService->sendAdminVotesMaxedEmail($proposal);
+	    $emailService->sendAdminVotesMaxedEmail($proposal);
+	    $emailService->sendUserVotesMaxedEmail($proposal);
     }
   }
 }

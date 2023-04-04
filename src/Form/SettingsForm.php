@@ -98,6 +98,7 @@ class SettingsForm extends ConfigFormBase {
       'proposal_accepted_user' => 'Email to user - proposal accepted',
       'proposal_rejected_user' => 'Email to user - proposal rejected',
       'vote_received_user' => 'Email to user - vote received',
+      'proposal_vote_maxed_user' => 'Email to user . proposal maxed',
       'create_proposal_admin' => 'Email to admin - proposal created',
       'vote_maxed_admin' => 'Email to admin - votes have maxed',
     ];

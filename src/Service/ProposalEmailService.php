@@ -85,6 +85,16 @@ class ProposalEmailService {
     return $this->prepareAndSendEmail($proposal, $template_key);
   }
 
+
+  public function sendUserVotesMaxedEmail(NodeInterface $proposal) {
+    $template_key = 'proposal_vote_maxed_user';
+    return $this->prepareAndSendEmail($proposal, $template_key);
+  }
+
+
+
+
+
   /**
    * Sends email to admin about proposal being created.
    *
