@@ -55,6 +55,17 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('Number of votes needed for proposal')
     ];
 
+    $form['proposal_vote_notify'] = [
+      '#type' => 'textfield',
+      '#attributes' => array(
+        ' type' => 'number',
+      ),
+      '#title' => $this->t('Vote notify'),
+      '#default_value' => ($config->get('proposal_vote_notify') ?? 0),
+      '#description' => $this->t('Number of new votes before notify')
+    ];
+
+
     $form['proposal_publish_period_months'] = [
       '#type' => 'textfield',
       '#attributes' => array(

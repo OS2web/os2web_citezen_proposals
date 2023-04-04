@@ -124,9 +124,20 @@ class ProposalVoteForm extends FormBase {
     $proposal = Node::load($this->proposalId);
     $this->messenger()->addStatus($this->t('Your vote for %title is now registered', ['%title' => $proposal->label()]));
 
-    /** @var \Drupal\os2web_citizen_proposals\Service\ProposalEmailService $emailService */
-    $emailService = \Drupal::service('os2web_citizen_proposals.email_service');
-    $emailService->sendUserVoteReceivedEmail($proposal);
+    $config = \Drupal::config(SettingsForm::$configName);
+    $notify = $config->get('proposal_vote_notify');
+    $countVotes = 0;
+    if ($notify && (int) $notify > 1) {
+        $countVotes = $proposal->get('field_os2web_cit_props_votes')->comment_count;
+        if (fmod($countVotes, $notify) == 0) {
+            $emailService = \Drupal::service('os2web_citizen_proposals.email_service');
+            $emailService->sendUserVoteReceivedEmail($proposal);
+        }
+
+    } else {
+        $emailService = \Drupal::service('os2web_citizen_proposals.email_service');
+        $emailService->sendUserVoteReceivedEmail($proposal);
+    }
 
     // Checking if votes have maxed.
     $config = \Drupal::config(SettingsForm::$configName);
