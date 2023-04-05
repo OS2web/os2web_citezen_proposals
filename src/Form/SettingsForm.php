@@ -45,6 +45,13 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('Email to receive admin proposal notifications'),
     ];
 
+    $form['copy_email'] = [
+        '#type' => 'email',
+        '#title' => $this->t('Copy email'),
+        '#default_value' => $config->get('copy_email'),
+        '#description' => $this->t('Email to receive a copy of all user proposal notifications'),
+    ];
+
     $form['proposal_max_votes'] = [
       '#type' => 'textfield',
       '#attributes' => array(
