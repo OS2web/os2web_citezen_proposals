@@ -154,6 +154,7 @@ class ProposalEmailService {
 
     $subject = $config->get("email_subject_$template_key");
     $body = $config->get("email_body_$template_key");
+    $copy_email = $config->get("copy_email");
 
     // Getting the email.
     if ($template_key == 'create_proposal_admin' || $template_key == 'vote_maxed_admin') {
@@ -187,7 +188,16 @@ class ProposalEmailService {
         ->getDefaultLanguage()
         ->getId(), $message);
 
-    // Changing theme back.
+    if ($mailSentStatus && !empty($copy_email) && filter_var($copy_email, FILTER_VALIDATE_EMAIL)) {
+      $message['to'] = $copy_email;
+      $message['subject'] = ":: COPY :: " . $message['subject'];
+      \Drupal::service('plugin.manager.mail')
+        ->mail('os2web_citizen_proposals', $template_key, $message['to'], \Drupal::languageManager()
+        ->getDefaultLanguage()
+        ->getId(), $message);
+      }
+
+      // Changing theme back.
     \Drupal::theme()->setActiveTheme($active_theme);
 
     return $mailSentStatus;
