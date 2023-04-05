@@ -91,8 +91,10 @@ class ProposalEmailService {
     return $this->prepareAndSendEmail($proposal, $template_key);
   }
 
-
-
+  public function sendUserProposalNotMaxedEmail(NodeInterface $proposal) {
+    $template_key = 'proposal_not_vote_maxed_user';
+    return $this->prepareAndSendEmail($proposal, $template_key);
+  }
 
 
   /**

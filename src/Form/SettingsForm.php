@@ -100,15 +100,18 @@ class SettingsForm extends ConfigFormBase {
       '#type' => 'details',
       '#title' => t('Email templates'),
     ];
+
     $email_template_keys = [
       'create_proposal_user' => 'Email to user - proposal created',
       'proposal_accepted_user' => 'Email to user - proposal accepted',
       'proposal_rejected_user' => 'Email to user - proposal rejected',
       'vote_received_user' => 'Email to user - vote received',
       'proposal_vote_maxed_user' => 'Email to user . proposal maxed',
+      'proposal_not_vote_maxed_user' => 'Email to user - proposal not maxed',
       'create_proposal_admin' => 'Email to admin - proposal created',
       'vote_maxed_admin' => 'Email to admin - votes have maxed',
     ];
+
     $template_description = $this->t("You can use the following replacement tokens: <br>
       <b>@proposal_link</b> => Link to proposal node<br>
       <b>@proposal_title</b> => Title of the proposal<br>
