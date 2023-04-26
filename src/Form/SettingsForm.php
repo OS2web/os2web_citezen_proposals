@@ -95,6 +95,14 @@ class SettingsForm extends ConfigFormBase {
       '#description' => $this->t('Any proposals older that this period will be deleted')
     ];
 
+
+    $form['proposal_publish_date_on_author'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Set approved date on create date'),
+      '#default_value' => $config->get('proposal_publish_date_on_author'),
+    ];
+
+
     // Email templates.
     $form['email_templates'] = [
       '#type' => 'details',

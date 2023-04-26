@@ -74,7 +74,14 @@ function os2web_citizen_proposals_node_presave(EntityInterface $entity) {
   // Unpublish node if proposal is rejected.
   $status = $entity->field_os2web_cit_props_status->value;
   if ($status == 'accept') {
-    $entity->setPublished();
+	$entity->setPublished();
+
+	$config = \Drupal::config('os2web_citizen_proposals.settings');
+	$writePublishDate = ($config->get('proposal_publish_date_on_author') == 1);
+	if ($writePublishDate && $entity->original->field_os2web_cit_props_status->value != $status) {
+        	$entity->setCreatedTime(time());
+	}
+
   } elseif ($status == 'reject') {
     $entity->setUnpublished();
   }
