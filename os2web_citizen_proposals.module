@@ -175,7 +175,10 @@ function os2web_citizen_proposals_expire_nodes() {
       if ($votes < $max ) {
           $emailService->sendUserProposalNotMaxedEmail($node);
       }
-      
+
+      if ($node->hasField('field_os2web_cit_props_status')) {
+        $node->field_os2web_cit_props_status = "expired";
+      }
       $node->setUnpublished();
       $node->save();
   }
