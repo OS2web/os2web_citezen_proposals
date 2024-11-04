@@ -40,6 +40,7 @@ function os2web_citizen_proposals_preprocess_paragraph__os2web_citizen_proposals
   $variables['new_proposal_form'] = $form;
 
   $query = \Drupal::entityQuery('node');
+  $query->accessCheck(false);
   $query->condition('status', 1);
   $query->condition('type', 'os2web_citizen_proposals');
   $entity_ids = $query->execute();
@@ -153,6 +154,7 @@ function os2web_citizen_proposals_expire_nodes() {
   $publishPeriodTs = strtotime("-$publishPeriodMonths months");
 
   $query = \Drupal::entityQuery('node');
+  $query->accessCheck(false);
   $query->condition('status', 1);
   $query->condition('type', 'os2web_citizen_proposals');
   $query->condition('created', $publishPeriodTs, '<');
@@ -197,6 +199,7 @@ function os2web_citizen_proposals_delete_nodes() {
   $lifePeriodTs = strtotime("-$lifePeriodMonths months");
 
   $query = \Drupal::entityQuery('node');
+  $query->accessCheck(false);
   $query->condition('type', 'os2web_citizen_proposals');
   $query->condition('created', $lifePeriodTs, '<');
   $entity_ids = $query->execute();

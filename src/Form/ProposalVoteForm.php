@@ -92,6 +92,7 @@ class ProposalVoteForm extends FormBase {
 
     // Checking This email was use previously for voting for the same proposal.
     $query = \Drupal::entityQuery('comment');
+    $query->accessCheck(false);
     $query->condition('comment_type', 'os2web_citizen_proposals_vote');
     $query->condition('entity_id', $this->proposalId);
     $query->condition('field_os2web_cit_props_v_email', $email);
