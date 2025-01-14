@@ -5,10 +5,10 @@
  * OS2Web Citizen Proposals module file.
  */
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\Entity\Node;
 use Drupal\os2web_citizen_proposals\Form\SettingsForm;
-use Drupal\comment\Entity\Comment;
 
 /**
  * Implements hook_theme().
@@ -53,10 +53,14 @@ function os2web_citizen_proposals_preprocess_paragraph__os2web_citizen_proposals
         'vote_form' => \Drupal::formBuilder()->getForm('Drupal\os2web_citizen_proposals\Form\ProposalVoteForm', $proposal->id()),
         'votes_count' => $proposal->get('field_os2web_cit_props_votes')->comment_count,
       ];
+
+      $tags = Cache::buildTags('node', [$proposal->id()]);
+      $variables['#cache']['tags'] = Cache::mergeTags($variables['#cache']['tags'] ?? [], $tags);
     }
   }
 
-  $variables['#cache']['tags'][] = 'node_list:os2web_citizen_proposals';
+  $tags = Cache::buildTags('node_list', ['os2web_citizen_proposals']);
+  $variables['#cache']['tags'] = Cache::mergeTags($variables['#cache']['tags'] ?? [], $tags);
 }
 
 /**
@@ -213,5 +217,21 @@ function os2web_citizen_proposals_delete_nodes() {
   /** @var \Drupal\node\NodeInterface $node */
   foreach ($nodes as $node) {
     $node->delete();
+  }
+}
+
+/**
+ * Implements hook_entity_delete().
+ *
+ * Invalidates the cache of a node when a comment is deleted.
+ */
+function os2web_citizen_proposals_comment_delete(EntityInterface $entity) {
+  // Get the commented entity (e.g., the node).
+  $commented_entity = $entity->getCommentedEntity();
+
+  // Check if the commented entity is a node.
+  if ($commented_entity && $commented_entity->getEntityTypeId() === 'node') {
+    // Invalidate the cache of the node.
+    \Drupal::service('cache_tags.invalidator')->invalidateTags(['node:' . $commented_entity->id()]);
   }
 }
